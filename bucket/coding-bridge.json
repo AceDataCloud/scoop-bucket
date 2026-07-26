@@ -40,8 +40,5 @@
     "checkver": {
         "url": "https://pypi.org/pypi/coding-bridge/json",
         "jsonpath": "$.info.version"
-    },
-    "autoupdate": {
-        "url": "https://pypi.org/pypi/coding-bridge/json"
     }
 }
