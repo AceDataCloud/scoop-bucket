@@ -1,0 +1,47 @@
+{
+    "version": "2026.7.22.1",
+    "description": "Node daemon for AceDataCloud Coding Bridge — run Claude Code / Codex on your own machine and drive it from the web.",
+    "homepage": "https://github.com/AceDataCloud/CodingBridge",
+    "license": "AGPL-3.0-or-later",
+    "depends": "python",
+    "suggest": {
+        "Python": "python/python311"
+    },
+    "installer": {
+        "script": [
+            "Write-Host 'Installing coding-bridge from PyPI (pip --user)...'",
+            "python -m pip install --user --no-warn-script-location --upgrade \"coding-bridge==$version\""
+        ]
+    },
+    "uninstaller": {
+        "script": [
+            "python -m pip uninstall -y coding-bridge"
+        ]
+    },
+    "bin": [
+        [
+            "shim\\coding-bridge.cmd",
+            "coding-bridge"
+        ]
+    ],
+    "pre_install": [
+        "$shimdir = Join-Path $dir 'shim'",
+        "New-Item -ItemType Directory -Force -Path $shimdir | Out-Null",
+        "# Shim calls the module so it works regardless of where pip put the Scripts entry point.",
+        "@('@echo off', 'python -m coding_bridge %*') | Set-Content -Path (Join-Path $shimdir 'coding-bridge.cmd') -Encoding Ascii"
+    ],
+    "notes": [
+        "coding-bridge is installed into your per-user Python (pip --user).",
+        "Pair once, then optionally register it as a background service:",
+        "  coding-bridge pair",
+        "  coding-bridge service install",
+        "Docs: https://github.com/AceDataCloud/CodingBridge"
+    ],
+    "checkver": {
+        "url": "https://pypi.org/pypi/coding-bridge/json",
+        "jsonpath": "$.info.version"
+    },
+    "autoupdate": {
+        "url": "https://pypi.org/pypi/coding-bridge/json"
+    }
+}
