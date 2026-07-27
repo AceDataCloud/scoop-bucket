@@ -1,5 +1,5 @@
 {
-    "version": "2026.7.26.3",
+    "version": "2026.7.27.0",
     "description": "Node daemon for AceDataCloud Coding Bridge \u2014 run Claude Code / Codex on your own machine and drive it from the web.",
     "homepage": "https://github.com/AceDataCloud/CodingBridge",
     "license": "AGPL-3.0-or-later",
